@@ -1,8 +1,12 @@
 <template>
   <div class="hello">
     <h1>Salut mattis, tu suces ?</h1>
+<<<<<<< HEAD
     <h2>coucou<h2>
     
+=======
+    <h2>sdf sdf sd</h2>
+>>>>>>> aa43fcb2d99c45b9ae18e0d8988d76c149cf034a
   </div>
 </template>
 
