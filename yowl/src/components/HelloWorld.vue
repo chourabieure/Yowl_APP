@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>Salut mattis, tu suces ?</h1>
+    <h2>coucou<h2>
     
   </div>
 </template>
