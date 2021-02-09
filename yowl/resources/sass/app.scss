@@ -6,3 +6,53 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.page-auth{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    .logo{
+        height: 120px;
+        margin-bottom: 16px;
+    }
+    .bottom{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        a,button{
+            width: 45%;
+        }
+    }
+
+    .footer{
+        width: 100%;
+        padding: 10px 35px;
+        display: flex;
+        justify-content: flex-start;
+
+        a{
+            color: white;
+            font-weight: bold;
+            padding-left: 0 ;
+        }
+    }
+}
+
+
+#app{
+	margin:auto;
+	height: 100vh;
+	// max-width: 375px;
+	background-color: #214E5B;
+	position: relative;
+}
+
+
+.page{
+	height: calc(100vh - 100px);
+	background-color: whitesmoke;
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}

@@ -10944,3 +10944,52 @@ a.text-dark:focus {
   }
 }
 
+.page-auth {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.page-auth .logo {
+  height: 120px;
+  margin-bottom: 16px;
+}
+
+.page-auth .bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-auth .bottom a,
+.page-auth .bottom button {
+  width: 45%;
+}
+
+.page-auth .footer {
+  width: 100%;
+  padding: 10px 35px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.page-auth .footer a {
+  color: white;
+  font-weight: bold;
+  padding-left: 0;
+}
+
+#app {
+  margin: auto;
+  height: 100vh;
+  background-color: #214E5B;
+  position: relative;
+}
+
+.page {
+  height: calc(100vh - 100px);
+  background-color: whitesmoke;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+

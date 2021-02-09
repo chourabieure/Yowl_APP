@@ -15,8 +15,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['auth'])->name('welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::get('{path}', function ($path) {
+
+    if ($path == 'logout') {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+    return view('welcome');
+})->where('path', '([A-z\d-/_.]+)?')->middleware(['auth']);
