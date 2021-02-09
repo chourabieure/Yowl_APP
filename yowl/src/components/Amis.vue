@@ -1,16 +1,15 @@
 <template>
-	<div class="page page-Feed">
-		<h2>Page Feed</h2>
+	<div class="page page-Amis">
+		<h2>Page Amis</h2>
 
 	</div>
 </template>
 
 <script>
-
 export default {
-	name: "Feed",
+	name: "Amis",
 	//Composants utilisés a l'intérieur de celui la
-	
+
 	//Variables propres au composant
 	data() {
 		return {};
