@@ -26,7 +26,6 @@ export default {
 	background-color: #214e5b;
 }
 .view-Menu {
-
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -34,7 +33,7 @@ export default {
 	justify-content: space-around;
 	align-items: center;
 	padding: 20px 20px;
-  padding-right: 30px;
+	padding-right: 30px;
 
 	i {
 		font-size: 30px !important;
@@ -44,19 +43,20 @@ export default {
 		// background-color:#4B9DAC ;
 		height: 60px;
 		width: 30px;
-    position: relative;
+		position: relative;
 
 		.button {
-      position: absolute;
+			position: absolute;
 			background-color: #4b9dac;
-      border: solid 5px white;
-      border-radius: 15px;
-      top: -55px;
-      left: 50%;
-      transform: translate(-50%);
+			border: solid 5px white;
+			border-radius: 15px;
+			top: -55px;
+			left: 50%;
+			transform: translate(-50%);
 			height: 75px;
 			width: 75px;
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+			box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+				rgba(0, 0, 0, 0.23) 0px 3px 6px;
 		}
 	}
 }
