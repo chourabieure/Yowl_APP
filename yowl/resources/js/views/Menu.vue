@@ -11,13 +11,26 @@
 </template>
 
 <script>
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
 	name: "Menu",
 	data() {
 		return {};
 	},
-	mounted() {},
-	methods: {},
+	created() {
+		this.fetchAuthUser();
+	},
+	mounted() {
+
+	},
+	methods: {
+		...mapActions(["fetchAuthUser"]),
+	},
+    computed: {
+		...mapGetters(["getAuthUser"]),
+	},
 };
 </script>
 
@@ -26,7 +39,7 @@ export default {
 	background-color: #214e5b;
 }
 .view-Menu {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	display: flex;
