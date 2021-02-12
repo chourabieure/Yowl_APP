@@ -17,7 +17,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="user in users" :key="user.id">
+				<tr v-for="user in users" :key="user.id" @click="redirect(user.id)">
 					<th scope="row">{{user.id}}</th>
 					<td>{{user.name}}</td>
 					<td>{{user.email}}</td>
@@ -50,9 +50,20 @@ export default {
 			.catch((error) => console.log(error));
 	},
 	//Methods du composant
-	methods: {},
+	methods: {
+		redirect(id){
+			this.$router.push({ name: 'CRUD_USER_SHOW',params: { id: id} })
+		}
+	},
 };
 </script>
 
 <style scoped lang="scss">
+
+tr{
+	&:hover{
+		background-color: lightgray;
+		cursor:pointer
+	}
+}
 </style>

@@ -41,13 +41,31 @@ Route::get('/admin/users', function () {
 
     return response()->json($users);
 });
-Route::get('/admin/email/${email}', function ($email) {
+Route::get('/admin/user/{id}', function ($id) {
+    try {
+        $user = User::find($id);
+
+        if(!$user){
+            $error = ['error' => ['message' => "User not found"]];
+            return response()->json($error, 401);
+        }else{
+            return response()->json($user);
+        }
+    } catch (PDOException $e) {
+        $error = ['error' => ['message' => "Something went wrong"]];
+        return response()->json($error, 401);
+    }
+
+});
+
+Route::get('/admin/email/{email}', function ($email) {
     try {
         $user = User::where('email', $email)->get();
-        if(!$user){
-            return response()->json('empty',201);
+        if($user->isEmpty()){
+
+            return response()->json(true,201);
         }else{
-            return response()->json('not_empty',201);
+            return response()->json(false,201);
         }
     
     } catch (PDOException $e) {
@@ -55,10 +73,22 @@ Route::get('/admin/email/${email}', function ($email) {
         return response()->json($error, 401);
     }
 
-    return response()->json($user);
 });
+Route::get('/admin/name/{name}', function ($name) {
+    try {
+        $user = User::where('name', $name)->get();
+        if($user->isEmpty()){
+            return response()->json(true,201);
+        }else{
+            return response()->json(false,201);
+        }
+    
+    } catch (PDOException $e) {
+        $error = ['error' => ['message' => "Something went wrong"]];
+        return response()->json($error, 401);
+    }
 
-
+});
 
 
 Route::post('/admin/users/add', function (Request $request) {
@@ -69,6 +99,19 @@ Route::post('/admin/users/add', function (Request $request) {
 
     }catch(PDOException $e){
         $error = ['error' => ['message' => "Something went wrong"]];
+        return response()->json($error, 401);
+    }
+    return response()->json('ok',201);
+});
+
+Route::post('/admin/users/edit', function (Request $request) {
+
+    try{
+        $user = User::find($request->id);
+        $user->update($request->user_info);
+
+    }catch(PDOException $e){
+        $error = ['error' => ['message' => "Something went wrong :"+$e]];
         return response()->json($error, 401);
     }
     return response()->json('ok',201);

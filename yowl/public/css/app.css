@@ -11153,3 +11153,21 @@ html {
   vertical-align: 100%;
 }
 
+.header-page .btn-edit i {
+  color: orange !important;
+  padding: 0;
+  vertical-align: 100%;
+}
+
+.header-page .btn-cancel i {
+  color: red !important;
+  padding: 0;
+  vertical-align: 100%;
+}
+
+.header-page .btn-check i {
+  color: green !important;
+  padding: 0;
+  vertical-align: 100%;
+}
+

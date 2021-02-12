@@ -200,4 +200,28 @@ html {
             vertical-align: 100%;
         }
     }
+    .btn-edit {
+        
+        i {
+            color: orange !important;
+            padding: 0;
+            vertical-align: 100%;
+        }
+    }
+    .btn-cancel {
+        
+        i {
+            color: red !important;
+            padding: 0;
+            vertical-align: 100%;
+        }
+    }
+    .btn-check {
+        
+        i {
+            color: green !important;
+            padding: 0;
+            vertical-align: 100%;
+        }
+    }
 }

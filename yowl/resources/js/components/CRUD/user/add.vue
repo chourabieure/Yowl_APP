@@ -14,6 +14,8 @@
 						<label class="form__label">Name : </label>
 						<div class="error-message" v-if="!$v.name.required">Field is required</div>
 						<div class="error-message" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
+						<div class="error-message" v-if="!$v.name.isUnique">This name is already registered.</div>
+
 					</div>
 					<input class="form__input" v-model.trim="$v.name.$model" :class="status($v.name)" />
 				</div>
@@ -25,10 +27,10 @@
 						<label class="form__label">Email : </label>
 						<div class="error-message" v-if="!$v.email.required">Field is required</div>
 						<div class="error-message" v-if="!$v.email.email">Bad email format</div>
-						  <div class="error-message" v-if="!$v.email.isUnique">This username is already registered.</div>
+						<div class="error-message" v-if="!$v.email.isUnique">This Email is already registered.</div>
 
 					</div>
-					
+
 					<input class="form__input" v-model.trim="$v.email.$model" :class="status($v.email)" />
 				</div>
 
@@ -55,6 +57,16 @@
 				</div>
 
 			</div>
+			<div class="field">
+				<div class="form-group toggle">
+					<label class="form__label" for="is_admin">Role admin ? </label>
+
+					<label class="switch" for="is_admin">
+						<input id="is_admin" type="checkbox" v-model="is_admin" />
+						<div class="slider round"></div>
+					</label>
+				</div>
+			</div>
 
 			<button class="button" type="submit" :disabled="submitStatus === 'PENDING'">Submit!</button>
 
@@ -69,6 +81,7 @@
 
 <script>
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
+
 export default {
 	name: "CRUD_USER_ADD",
 	//Composants utilisés a l'intérieur de celui la
@@ -81,12 +94,18 @@ export default {
 			password: "",
 			repeatPassword: "",
 			submitStatus: null,
+			is_admin: false,
 		};
 	},
 	validations: {
 		name: {
 			required,
 			minLength: minLength(4),
+			async isUnique(value) {
+				if (value === "") return true;
+				const response = await fetch(`/api/admin/name/${value}`);
+				return Boolean(await response.json());
+			},
 		},
 		email: {
 			required,
@@ -124,21 +143,34 @@ export default {
 				// do your submit logic here
 				this.submitStatus = "PENDING";
 
+				if (this.is_admin == true) {
+					this.is_admin = 1;
+				} else {
+					this.is_admin = 0;
+				}
 				axios
 					.post("/api/admin/users/add", {
 						user_info: {
 							name: this.name,
 							email: this.email,
 							password: this.password,
-							is_admin: 0,
+							is_admin: this.is_admin,
 						},
 					})
 					.then((response) => {
 						if (response.data == "ok") {
 							this.submitStatus = "OK";
+							setTimeout(
+							() =>
+								this.$router.push({
+									name: "CRUD_USER",
+								}),
+							500
+						);
 						} else {
 							this.submitStatus = "OUPS";
 						}
+						
 					})
 					.catch((error) => console.log(error));
 			}
@@ -214,5 +246,54 @@ export default {
 .error-message {
 	color: red;
 	font-weight: bold;
+}
+
+.switch {
+	display: inline-block;
+	height: 34px;
+	position: relative;
+	width: 60px;
+}
+
+.switch input {
+	display: none;
+}
+
+.slider {
+	background-color: rgb(114, 114, 114);
+	bottom: 0;
+	cursor: pointer;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: 0.4s;
+}
+
+.slider:before {
+	background-color: #fff;
+	bottom: 4px;
+	content: "";
+	height: 26px;
+	left: 4px;
+	position: absolute;
+	transition: 0.4s;
+	width: 26px;
+}
+
+input:checked + .slider {
+	background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+	transform: translateX(26px);
+}
+
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
 }
 </style>
