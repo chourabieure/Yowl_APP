@@ -1,16 +1,21 @@
 <template>
 	<div class="page page-Settings">
 
-		<div class="avatar"><i class="fas fa-user"></i></div>
-		<h2 class="username">Admin</h2>
-
 		<a class="btn-logout" href="/logout"><i class="fas fa-power-off"></i></a>
+		<div class="avatar"><i class="fas fa-user"></i></div>
+		<h2 class="username">{{getAuthUser.name}}</h2>
+
+
+		
+
+		<router-link :to="{name:'CRUD'}" class="btn-crud" v-if="getAuthUser.is_admin">CRUD</router-link>
 	</div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-	name: "Template",
+	name: "Settings",
 	//Composants utilisés a l'intérieur de celui la
 	components: {},
 	//Variables propres au composant
@@ -18,9 +23,12 @@ export default {
 		return {};
 	},
 	//Executé au montage du composant
-	mounted() {},
-	//Methods du composant
-	methods: {},
+	mounted() {
+		
+	},
+    computed: {
+		...mapGetters(["getAuthUser"]),
+	},
 };
 </script>
 

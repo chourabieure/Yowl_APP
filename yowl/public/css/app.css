@@ -10944,10 +10944,22 @@ a.text-dark:focus {
   }
 }
 
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
 .page-auth {
   height: 100vh;
   display: flex;
   align-items: center;
+  background-color: #214e5b;
 }
 
 .page-auth .logo {
@@ -10982,15 +10994,181 @@ a.text-dark:focus {
 #app {
   margin: auto;
   height: 100vh;
-  background-color: #214E5B;
   position: relative;
 }
 
-.page {
-  height: calc(100vh - 100px);
-  background-color: whitesmoke;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+.my-card {
+  background-color: #e2e2e2;
+  width: 350px;
+  margin: auto;
+  margin-bottom: 16px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.my-card .my-card-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-card .my-card-header img {
+  border-radius: 25px;
+}
+
+.my-card .my-card-header .buttons {
+  padding-left: 0;
+}
+
+.my-card .my-card-header .buttons .btn-like,
+.my-card .my-card-header .buttons .btn-comment {
+  width: 30px;
+  background-color: #c45e38;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 25px;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.my-card .my-card-header .buttons .btn-like h2,
+.my-card .my-card-header .buttons .btn-comment h2 {
+  padding-top: 7px;
+  font-size: 15px;
+}
+
+.my-card .my-card-header .buttons .btn-like i,
+.my-card .my-card-header .buttons .btn-comment i {
+  padding: 6px 0;
+  font-size: 15px;
+}
+
+.my-card .my-card-header .buttons .btn-comment {
+  margin-top: 16px;
+}
+
+.my-card .my-card-body {
+  padding: 16px;
+  padding-top: 0;
+}
+
+.my-card .my-card-body .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.my-card .my-card-body .top .avatar {
+  background-color: black;
+  height: 48px;
+  width: 48px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-card .my-card-body .top .avatar i {
+  color: white;
+}
+
+.my-card .my-card-body .top .info-owner {
+  padding-left: 16px;
+}
+
+.my-card .my-card-body .top .info-owner .name {
+  color: #214e5b;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.my-card .my-card-body .top .info-owner .groupe {
+  font-size: 20px;
+  font-weight: bold;
+  color: #c45e38;
+  margin: 0;
+}
+
+.my-card .my-card-body .top .time {
+  color: #214e5b;
+  display: flex;
+}
+
+.my-card .my-card-body .top .time i {
+  padding-top: 1px;
+  padding-right: 5px;
+}
+
+.my-card .my-card-body .top .time h2 {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.my-card .my-card-body .bottom {
+  font-size: 16px;
+}
+
+.my-card .my-card-body .bottom p {
+  margin: 0;
+  padding-top: 15px;
+}
+
+.header-page {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header-page a {
+  font-size: 40px;
+  height: 50px;
+}
+
+.header-page a i {
+  padding-right: 10px;
+  font-size: 40px;
+  color: #c45e38;
+  vertical-align: 100%;
+}
+
+.header-page .title {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translate(-50%);
+  font-weight: bold;
+  color: #c45e38;
+}
+
+.header-page .btn-add i {
+  color: green !important;
+  padding: 0;
+  vertical-align: 100%;
+}
+
+.header-page .btn-edit i {
+  color: orange !important;
+  padding: 0;
+  vertical-align: 100%;
+}
+
+.header-page .btn-cancel i {
+  color: red !important;
+  padding: 0;
+  vertical-align: 100%;
+}
+
+.header-page .btn-check i {
+  color: green !important;
+  padding: 0;
+  vertical-align: 100%;
 }
 
 .amis {

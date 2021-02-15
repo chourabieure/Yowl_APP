@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\User;
+use App\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +20,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth'])->name('welcome');
+
+Route::prefix('api')->middleware('auth')->group(function () {
+    Route::get('auth_user', function () {
+        try {
+            $user = Auth::user();
+        } catch (PDOException $e) {
+            $error = ['error' => ['message' => "Unauthorized. You must be authentified"]];
+            return response()->json($error, 401);
+        }
+        return response()->json($user);
+    });
+
+
+    
+});
 
 Auth::routes();
 
