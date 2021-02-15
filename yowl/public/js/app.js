@@ -38334,7 +38334,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "page page-Amis" }, [
-      _c("h2", [_vm._v("Page Amis")])
+      _c("h2", { staticClass: "amis" }, [_vm._v("Amis")])
     ])
   }
 ]
@@ -54210,8 +54210,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/mat/Epitech/D1/_4_YOWL/yowl/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/mat/Epitech/D1/_4_YOWL/yowl/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/theo/Yowl_APP/yowl/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/theo/Yowl_APP/yowl/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

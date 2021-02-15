@@ -10993,3 +10993,9 @@ a.text-dark:focus {
   border-bottom-right-radius: 25px;
 }
 
+.amis {
+  font-weight: bold;
+  color: orange;
+  margin-left: 15px;
+}
+

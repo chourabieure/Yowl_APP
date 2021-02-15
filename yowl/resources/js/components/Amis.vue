@@ -1,6 +1,6 @@
 <template>
 	<div class="page page-Amis">
-		<h2>Page Amis</h2>
+		<h2 class="amis">Amis</h2>
 
 	</div>
 </template>
