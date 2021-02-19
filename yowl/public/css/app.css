@@ -10953,6 +10953,7 @@ html {
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
+  max-width: 375px;
 }
 
 .page-auth {
@@ -11119,7 +11120,7 @@ html {
 }
 
 .header-page {
-  position: relative;
+  width: 100%;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -11169,5 +11170,14 @@ html {
   color: green !important;
   padding: 0;
   vertical-align: 100%;
+}
+
+.modal-dialog {
+  width: 100%;
+}
+
+.modal-open .modal {
+  display: flex !important;
+  align-items: center;
 }
 

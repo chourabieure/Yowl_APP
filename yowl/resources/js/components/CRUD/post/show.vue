@@ -1,43 +1,38 @@
 <template>
-	<div class="page-crud-user-add">
+	<div class="page-crud-post-add">
 		
 		<div class="header-page">
-			<router-link :to="{name:'CRUD_USER'}" class="btn-back"><i class="fas fa-arrow-left"></i></router-link>
+			<router-link :to="{name:'CRUD_POST'}" class="btn-back"><i class="fas fa-arrow-left"></i></router-link>
 
-			<h2 class="title">Showing User</h2>
-			<router-link :to="{name:'CRUD_USER_EDIT',params:{id:id}}" class="btn-edit"><i class="fas fa-wrench"></i></router-link>
+			<h2 class="title">Showing Post</h2>
+			<router-link :to="{name:'CRUD_POST_EDIT',params:{id:id}}" class="btn-edit"><i class="fas fa-wrench"></i></router-link>
 
 		</div>
 
 		<div class="content">
 			<div class="id">
 				<h1>ID : </h1>
-				<h2>{{user.id}}</h2>
+				<h2>{{post.id}}</h2>
 			</div>
-			<div class="name">
-				<h1>Name : </h1>
-				<h2>{{user.name}}</h2>
+			<div class="url">
+				<h1>Url : </h1>
+				<h2>{{post.url}}</h2>
 			</div>
-			<div class="email">
-				<h1>Email : </h1>
-				<h2>{{user.email}}</h2>
+			<div class="owner">
+				<h1>id_owner : </h1>
+				<h2>{{post.id_owner}}</h2>
 			</div>
-			<div class="Role">
-				<h1>Role : </h1>
-				<h2>{{user.is_admin ? 'ADMIN' : 'USER'}}</h2>
+			<div class="desc">
+				<h1>Description : </h1>
+				<h2>{{post.description}}</h2>
 			</div>
-			<div class="em_at">
-				<h1>verified_at : </h1>
-				<h2 v-if="user.email_verified_at">{{user.email_verified_at | formatDate}}</h2>
-				<h2 v-else>Not yet verified</h2>
+			<div class="likes">
+				<h1>nb_likes : </h1>
+				<h2>{{post.likes}}</h2>
 			</div>
 			<div class="cr_at">
 				<h1>created_at : </h1>
-				<h2>{{user.created_at | formatDate}}</h2>
-			</div>
-			<div class="up_at">
-				<h1>updated_at : </h1>
-				<h2>{{user.updated_at | formatDate}}</h2>
+				<h2>{{post.created_at | formatDate}}</h2>
 			</div>
 		</div>
 	</div>
@@ -89,26 +84,25 @@
 
 <script>
 export default {
-	name: "CRUD_USER_SHOW",
+	name: "CRUD_POST_SHOW",
 	//Composants utilisés a l'intérieur de celui la
 	props: ["id"],
 	data() {
 		return {
-			user: {},
+			post: {},
 		};
 	},
 	//Executé au montage du composant
 	mounted() {
 		axios
-			.get("/api/admin/user/" + this.id)
+			.get("/api/admin/post/" + this.id)
 			.then((response) => {
-				this.user = response.data;
+				this.post = response.data;
 			})
 			.catch((error) => console.log(error));
 	},
 	//Methods du composant
 	methods: {
-		deleteUser() {},
 	},
 };
 </script>

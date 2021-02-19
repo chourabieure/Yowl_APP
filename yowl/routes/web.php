@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use App\Relation;
 use App\Post;
 
 /*
@@ -32,6 +33,22 @@ Route::prefix('api')->middleware('auth')->group(function () {
         return response()->json($user);
     });
 
+    Route::get('/admin/relations', function () {
+        try {
+            $relation = Relation::where('from',Auth::user()->id)->where('status','F')->get();
+            
+            foreach($relation as $rel){
+                $rel->name = User::find($rel->to)->name;
+            }
+
+
+        } catch (PDOException $e) {
+            $error = ['error' => ['message' => "Unauthorized, you must be identhified"]];
+            return response()->json($error, 401);
+        }
+    
+        return response()->json($relation);
+    });
 
     
 });

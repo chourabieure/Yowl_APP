@@ -7,7 +7,7 @@
 		</div>
 		<div class="links">
 			<router-link :to="{name:'CRUD_USER'}" class="link">Users</router-link>
-			<router-link :to="{name:'CRUD'}" class="link">Posts</router-link>
+			<router-link :to="{name:'CRUD_POST'}" class="link">Posts</router-link>
 		</div>
 
 	</div>

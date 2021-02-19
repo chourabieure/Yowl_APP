@@ -1,30 +1,30 @@
 <template>
-	<form @submit.prevent="submit" class="page-crud-user-add">
+	<form @submit.prevent="submit" class="page-crud-post-add">
 
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Deleting User</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Deleting Post</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						Do you really want to delete this user ?
+						Do you really want to delete this post ?
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-danger" @click="deleteUser" data-dismiss="modal">Delete</button>
+						<button type="button" class="btn btn-danger" @click="deletePost" data-dismiss="modal">Delete</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="header-page">
-			<router-link :to="{name:'CRUD_USER_SHOW',params:{id:id}}" class="btn-back"><i class="fas fa-arrow-left"></i></router-link>
+			<router-link :to="{name:'CRUD_POST_SHOW',params:{id:id}}" class="btn-back"><i class="fas fa-arrow-left"></i></router-link>
 
-			<h2 class="title">Edit User</h2>
+			<h2 class="title">Edit Post</h2>
 			<a href="" class="btn-check"><i class="fas fa-check-circle"></i></a>
 			<button class="btn-check" type="submit" :disabled="submitStatus === 'PENDING'"></button>
 
@@ -38,43 +38,31 @@
 
 			<div class="id">
 				<h1>ID : </h1>
-				<h2>{{user.id}}</h2>
+				<h2>{{post.id}}</h2>
 			</div>
-			<div class="name">
-				<div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
+			<div class="url">
+				<div class="form-group" :class="{ 'form-group--error': $v.url.$error }">
 					<div class="header">
-						<label class="form__label">Name : </label>
-						<div class="error-message" v-if="!$v.name.required">Field is required</div>
-						<div class="error-message" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
+						<label class="form__label">Url : </label>
+						<div class="error-message" v-if="!$v.url.required">Field is required</div>
 
 					</div>
-					<input class="form__input" v-model.trim="$v.name.$model" :class="status($v.name)" :placeholder="user.name" />
+					<input class="form__input" v-model.trim="$v.url.$model" :class="status($v.url)" :placeholder="post.url" />
 				</div>
 			</div>
-			<div class="email">
-				<div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
+			<div class="desc">
+				<div class="form-group" :class="{ 'form-group--error': $v.desc.$error }">
 					<div class="header">
-						<label class="form__label">Email : </label>
-						<div class="error-message" v-if="!$v.email.required">Field is required</div>
-						<div class="error-message" v-if="!$v.email.email">Bad email format</div>
+						<label class="form__label">Description : </label>
+						<div class="error-message" v-if="!$v.desc.required">Field is required</div>
 
 					</div>
 
-					<input class="form__input" v-model.trim="$v.email.$model" :class="status($v.email)" :placeholder="user.email" />
-				</div>
-			</div>
-			<div class="Role">
-				<div class="form-group toggle">
-					<label class="form__label" for="is_admin">Role admin ? </label>
-
-					<label class="switch" for="is_admin">
-						<input id="is_admin" type="checkbox" v-model="is_admin" />
-						<div class="slider round"></div>
-					</label>
+					<input class="form__input" v-model.trim="$v.desc.$model" :class="status($v.desc)" :placeholder="post.description" />
 				</div>
 			</div>
 
-			<a href="" class="btn-suppr" data-toggle="modal" data-target="#exampleModal">Supprimer cet utilisateur</a>
+			<a href="" class="btn-suppr" data-toggle="modal" data-target="#exampleModal">Supprimer ce Post</a>
 		</div>
 
 	</form>
@@ -85,26 +73,23 @@
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 import $ from 'jquery'
 export default {
-	name: "CRUD_USER_EDIT",
+	name: "CRUD_POST_EDIT",
 	//Composants utilisés a l'intérieur de celui la
 	props: ["id"],
 	data() {
 		return {
-			user: {},
-			is_admin: false,
-			name: "",
-			email: "",
+			post: {},
+			url: "",
+			desc: "",
 			submitStatus: null,
 		};
 	},
 	validations: {
-		name: {
+		url: {
 			required,
-			minLength: minLength(4),
 		},
-		email: {
+		desc: {
 			required,
-			email,
 		},
 	},
 	methods: {
@@ -122,19 +107,13 @@ export default {
 				// do your submit logic here
 				this.submitStatus = "PENDING";
 
-				if (this.is_admin == true) {
-					this.is_admin = 1;
-				} else {
-					this.is_admin = 0;
-				}
 				axios
-					.post("/api/admin/users/edit", {
-						user_info: {
-							name: this.name,
-							email: this.email,
-							is_admin: this.is_admin,
+					.post("/api/admin/post/edit", {
+						post_info: {
+							url: this.url,
+							description: this.desc,
 						},
-						id: this.user.id,
+						id: this.post.id,
 					})
 					.then((response) => {
 						if (response.data == "ok") {
@@ -142,8 +121,8 @@ export default {
 							setTimeout(
 								() =>
 									this.$router.push({
-										name: "CRUD_USER_SHOW",
-										params: { id: this.user.id },
+										name: "CRUD_POST_SHOW",
+										params: { id: this.post.id },
 									}),
 								500
 							);
@@ -154,16 +133,16 @@ export default {
 					.catch((error) => console.log(error));
 			}
 		},
-		deleteUser() {
+		deletePost() {
 			axios
-				.post("/api/admin/user/delete", {
-					user_id: this.id,
+				.post("/api/admin/post/delete", {
+					post_id: this.id,
 				})
 				.then((response) => {
 					setTimeout(
 						() =>
 							this.$router.push({
-								name: "CRUD_USER",
+								name: "CRUD_POST",
 							}),
 						500
 					);
@@ -174,12 +153,11 @@ export default {
 	//Executé au montage du composant
 	mounted() {
 		axios
-			.get("/api/admin/user/" + this.id)
+			.get("/api/admin/post/" + this.id)
 			.then((response) => {
-				this.user = response.data;
-				this.name = response.data.name;
-				this.email = response.data.email;
-				this.is_admin = response.data.is_admin;
+				this.post = response.data;
+				this.url = response.data.url;
+				this.desc = response.data.description;
 			})
 			.catch((error) => console.log(error));
 	},

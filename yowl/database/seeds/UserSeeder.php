@@ -25,5 +25,16 @@ class UserSeeder extends Seeder
             'password' => Hash::make('user'),
             'is_admin' => 0
         ]);
+        for($i = 3; $i < 8; $i++){
+            DB::table('users')->insert([
+                'id'=>$i,
+                'name'=>'user'.$i,
+                'email' => 'user'.$i.'@user.com',
+                'password' => Hash::make('user'),
+                'is_admin' => 0
+            ]);
+
+        }
+        
     }
 }

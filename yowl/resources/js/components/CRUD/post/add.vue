@@ -1,37 +1,33 @@
 <template>
 	<div class="page-crud-user-add">
 		<div class="header-page">
-			<router-link :to="{name:'CRUD_USER'}" class="btn-back"><i class="fas fa-arrow-left"></i></router-link>
+			<router-link :to="{name:'CRUD_POST'}" class="btn-back"><i class="fas fa-arrow-left"></i></router-link>
 
-			<h2 class="title">Adding User</h2>
+			<h2 class="title">Adding Post</h2>
 		</div>
 
 		<form @submit.prevent="submit" class="create content">
 			<div class="field">
-				<div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
+				<div class="form-group" :class="{ 'form-group--error': $v.url.$error }">
 					<div class="header">
 
-						<label class="form__label">Name : </label>
-						<div class="error-message" v-if="!$v.name.required">Field is required</div>
-						<div class="error-message" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
-						<div class="error-message" v-if="!$v.name.isUnique">This name is already registered.</div>
+						<label class="form__label">Url : </label>
+						<div class="error-message" v-if="!$v.url.required">Field is required</div>
 
 					</div>
-					<input class="form__input" v-model.trim="$v.name.$model" :class="status($v.name)" />
+					<input class="form__input" v-model.trim="$v.url.$model" :class="status($v.url)" />
 				</div>
 
 			</div>
 			<div class="field">
-				<div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
+				<div class="form-group" :class="{ 'form-group--error': $v.description.$error }">
 					<div class="header">
-						<label class="form__label">Email : </label>
-						<div class="error-message" v-if="!$v.email.required">Field is required</div>
-						<div class="error-message" v-if="!$v.email.email">Bad email format</div>
-						<div class="error-message" v-if="!$v.email.isUnique">This Email is already registered.</div>
+						<label class="form__label">Description : </label>
+						<div class="error-message" v-if="!$v.description.required">Field is required</div>
 
 					</div>
 
-					<input class="form__input" v-model.trim="$v.email.$model" :class="status($v.email)" />
+					<input class="form__input" v-model.trim="$v.description.$model" :class="status($v.description)" />
 				</div>
 
 			</div>
@@ -83,46 +79,23 @@
 import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 
 export default {
-	name: "CRUD_USER_ADD",
+	name: "CRUD_POST_ADD",
 	//Composants utilisés a l'intérieur de celui la
 	components: {},
 	//Variables propres au composant
 	data() {
 		return {
-			name: "",
-			email: "",
-			password: "",
-			repeatPassword: "",
-			submitStatus: null,
-			is_admin: false,
+			url: "",
+			id_owner: "",
+			description: "",
 		};
 	},
 	validations: {
-		name: {
-			required,
-			minLength: minLength(4),
-			async isUnique(value) {
-				if (value === "") return true;
-				const response = await fetch(`/api/admin/name/${value}`);
-				return Boolean(await response.json());
-			},
+		url: {
+			required
 		},
-		email: {
-			required,
-			email,
-			async isUnique(value) {
-				if (value === "") return true;
-				const response = await fetch(`/api/admin/email/${value}`);
-				return Boolean(await response.json());
-			},
-		},
-		password: {
-			required,
-			minLength: minLength(8),
-		},
-		repeatPassword: {
-			required,
-			sameAsPassword: sameAs("password"),
+		description: {
+			required
 		},
 	},
 	//Executé au montage du composant
