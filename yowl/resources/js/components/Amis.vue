@@ -1,6 +1,6 @@
 <template>
 	<div class="page page-Amis">
-		<h2>Amis</h2>
+		<h2 class="amis">Amis</h2>
 
 		<div class="content">
 			<h2 v-for="friend in friends" :key="friend.id" class="user">
